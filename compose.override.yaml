@@ -3,7 +3,10 @@ services:
     build: { target: dev }
     environment:
       APP_ENV: dev
-    volumes: [./app:/var/www/app]
+    volumes:
+      - ./app:/var/www/app
+      # var/ (cache, logs) hors du disque Windows : évite les erreurs rmdir du partage de fichiers
+      - app_var:/var/www/app/var
     # En dev, php doit sortir sur Internet (composer). En prod il reste sur le réseau interne.
     networks: [backend, frontend]
 
@@ -14,3 +17,6 @@ services:
     image: adminer:4
     ports: ["8081:8080"]
     networks: [frontend, backend]
+
+volumes:
+  app_var:
