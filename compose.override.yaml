@@ -4,6 +4,8 @@ services:
     environment:
       APP_ENV: dev
     volumes: [./app:/var/www/app]
+    # En dev, php doit sortir sur Internet (composer). En prod il reste sur le réseau interne.
+    networks: [backend, frontend]
 
   nginx:
     volumes: [./app/public:/var/www/app/public:ro]
