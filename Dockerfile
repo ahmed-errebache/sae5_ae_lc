@@ -7,8 +7,11 @@ RUN apk add --no-cache icu-libs libpq \
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/app
 
-# Dev : le code est monté en volume par compose.override.yaml
+# Dev : code monté en volume, var/ dans un volume Docker.
+# php-fpm tourne en root (dev uniquement) pour partager var/ avec les commandes console.
 FROM base AS dev
+RUN printf '[www]\nuser = root\ngroup = root\n' > /usr/local/etc/php-fpm.d/zz-dev.conf
+CMD ["php-fpm", "-R"]
 
 # Dépendances seules (couche mise en cache)
 FROM base AS vendor
