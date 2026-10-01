@@ -1,0 +1,14 @@
+services:
+  php:
+    build: { target: dev }
+    environment:
+      APP_ENV: dev
+    volumes: [./app:/var/www/app]
+
+  nginx:
+    volumes: [./app/public:/var/www/app/public:ro]
+
+  adminer:
+    image: adminer:4
+    ports: ["8081:8080"]
+    networks: [frontend, backend]
