@@ -1,0 +1,6 @@
+.git
+.env
+**/vendor
+**/var
+app/.env.local
+*.md
