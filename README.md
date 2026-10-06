@@ -11,6 +11,7 @@ Symfony 7.4 · PHP 8.3-FPM · PostgreSQL 16 · nginx 1.27 · Docker Compose
 cp .env.example .env          # puis changer les mots de passe
 docker compose up -d --build
 docker compose exec php composer install                    # vendor/ n'est pas versionné
+importmap:install
 
 ```
 - Application : http://localhost:8080
