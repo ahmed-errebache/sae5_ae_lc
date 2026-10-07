@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <section class="hero">
+        <p class="eyebrow">Réseau Cocagne · outil de gestion commerciale</p>
+        <h1>Des paniers bio et solidaires, gérés simplement</h1>
+        <p class="lead">Commande d'abonnements, points de dépôt, composition des paniers et conseils de cuisine, pour les Jardins de Cocagne.</p>
+        <p class="team">Projet réalisé par <strong>{{ equipe|join(' et ') }}</strong> — SAÉ 5, BUT3 Informatique, IUT de Saint-Dié-des-Vosges.</p>
+    </section>
+
+    <section class="cards" aria-label="Modules">
+        <a class="card" href="{{ path('app_commande') }}">
+            <span class="card-tag">Disponible</span>
+            <h2>Commander un panier</h2>
+            <p>Choisir son abonnement et son point de dépôt, avec le prix calculé en direct.</p>
+        </a>
+        <a class="card" href="{{ path('app_carte') }}">
+            <span class="card-tag">Prototype</span>
+            <h2>Carte des points de dépôt</h2>
+            <p>Les lieux de retrait des paniers, par catégorie.</p>
+        </a>
+        <div class="card card-soon">
+            <span class="card-tag">Bientôt</span>
+            <h2>Composition des paniers</h2>
+            <p>Répartir le stock du mois entre les paniers en respectant le prix cible.</p>
+        </div>
+        <div class="card card-soon">
+            <span class="card-tag">Bientôt</span>
+            <h2>Assistant jardin et cuisine</h2>
+            <p>Des recettes avec les légumes du panier de la semaine.</p>
+        </div>
+    </section>
+{% endblock %}
