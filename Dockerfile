@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM php:8.4-fpm-alpine AS base
+FROM php:8.5-fpm-alpine AS base
 RUN apk add --no-cache icu-libs libpq \
  && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS icu-dev postgresql-dev \
  && docker-php-ext-install -j$(nproc) intl pdo_pgsql opcache \
