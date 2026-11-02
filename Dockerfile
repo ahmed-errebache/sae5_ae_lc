@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1
-FROM php:8.3-fpm-alpine AS base
+FROM php:8.5-fpm-alpine AS base
 RUN apk add --no-cache icu-libs libpq \
  && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS icu-dev postgresql-dev \
- && docker-php-ext-install -j$(nproc) intl pdo_pgsql opcache \
+ && docker-php-ext-install -j$(nproc) intl pdo_pgsql \
  && apk del .build-deps
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/app
