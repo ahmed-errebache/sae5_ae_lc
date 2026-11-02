@@ -1,0 +1,45 @@
+<div {{ attributes }}>
+    <fieldset>
+        <legend>1. Votre panier</legend>
+        {% for code, p in this.paniers %}
+            <label>
+                <input type="radio" name="panier" value="{{ code }}" data-model="panier" {{ panier == code ? 'checked' }}>
+                {{ p.nom }} — {{ p.prix|number_format(2, ',', ' ') }} €
+            </label><br>
+        {% endfor %}
+    </fieldset>
+
+    <fieldset>
+        <legend>2. Fréquence</legend>
+        <select data-model="frequence">
+            {% for code, f in this.frequences %}
+                <option value="{{ code }}" {{ frequence == code ? 'selected' }}>{{ f.label }}</option>
+            {% endfor %}
+        </select>
+    </fieldset>
+
+    <fieldset>
+        <legend>3. Point de dépôt</legend>
+        {% for code, d in this.depots %}
+            <label>
+                <input type="radio" name="depot" value="{{ code }}" data-model="depot"
+                       {{ depot == code ? 'checked' }} {{ d.places == 0 ? 'disabled' }}>
+                {{ d.nom }} — {{ d.creneau }}
+                {% if d.mention is defined %}<em>({{ d.mention }})</em>{% endif %}
+                {% if d.places == 0 %}<strong>complet</strong>{% endif %}
+            </label><br>
+        {% endfor %}
+    </fieldset>
+
+    <aside>
+        <h2>Récapitulatif</h2>
+        {% if this.prixMensuel is null %}
+            <p>Choisissez un panier.</p>
+        {% else %}
+            <p>{{ this.paniers[panier].nom }}, {{ this.frequences[frequence].label|lower }}</p>
+            {% if depot %}<p>Retrait : {{ this.depots[depot].nom }} ({{ this.depots[depot].creneau }})</p>{% endif %}
+            <p><strong>{{ this.prixMensuel|number_format(2, ',', ' ') }} € / mois</strong></p>
+        {% endif %}
+        <button type="button" {{ not this.complet ? 'disabled' }}>Valider ma commande</button>
+    </aside>
+</div>

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Points de dépôt{% endblock %}
+
+{% block body %}
+    <section class="page-head">
+        <p class="eyebrow">Prototype</p>
+        <h1>Les points de dépôt</h1>
+        <p class="lead">Cliquez sur un point pour voir le créneau de retrait des paniers.</p>
+    </section>
+
+    <div class="map-layout">
+        <div class="map" data-controller="carte" data-carte-depots-value="{{ depots|json_encode|e('html_attr') }}" role="region" aria-label="Carte des points de dépôt"></div>
+
+        <aside class="map-side">
+            <h2>Légende</h2>
+            <ul class="legend">
+                <li><span class="dot dot-jardin"></span> Le Jardin</li>
+                <li><span class="dot dot-public"></span> Ouvert à tous</li>
+                <li><span class="dot dot-reserve"></span> Réservé à un public</li>
+            </ul>
+            <h2>Dépôts</h2>
+            <ul class="depot-list">
+                {% for depot in depots %}
+                    <li>
+                        <strong>{{ depot.nom }}</strong><br>
+                        {{ depot.creneau }}
+                        {% if depot.mention is defined %}<br><em>{{ depot.mention }}</em>{% endif %}
+                        {% if depot.complet %}<br><span class="badge">Complet</span>{% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+            <p class="note">Données de démonstration. Les dépôts professionnels ne sont pas affichés sur la carte publique.</p>
+        </aside>
+    </div>
+{% endblock %}
