@@ -28,9 +28,10 @@ ENV APP_ENV=prod
 COPY --from=vendor /var/www/app/vendor ./vendor
 COPY app/ ./
 RUN composer dump-autoload --classmap-authoritative --no-dev \
+ && php bin/console importmap:install && php bin/console asset-map:compile \
  && mkdir -p var && chown -R www-data:www-data var
 
 # Serveur web
 FROM nginx:1.27-alpine AS nginx
 COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
-COPY app/public /var/www/app/public
+COPY --from=prod /var/www/app/public /var/www/app/public
