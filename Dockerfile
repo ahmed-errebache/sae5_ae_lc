@@ -9,8 +9,12 @@ WORKDIR /var/www/app
 
 # Dev : code monté en volume, var/ dans un volume Docker.
 # php-fpm tourne en root (dev uniquement) pour partager var/ avec les commandes console.
+# Au démarrage, composer install est lancé automatiquement si vendor/ est absent.
 FROM base AS dev
 RUN printf '[www]\nuser = root\ngroup = root\n' > /usr/local/etc/php-fpm.d/zz-dev.conf
+COPY docker/php/docker-entrypoint-dev.sh /usr/local/bin/docker-entrypoint-dev
+RUN chmod +x /usr/local/bin/docker-entrypoint-dev
+ENTRYPOINT ["docker-entrypoint-dev"]
 CMD ["php-fpm", "-R"]
 
 # Dépendances seules (couche mise en cache)
