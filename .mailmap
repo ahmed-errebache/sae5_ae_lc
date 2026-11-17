@@ -1,0 +1,5 @@
+# Regroupe les différentes identités de chaque membre sous un seul nom (git log, git shortlog).
+# Format : Nom canonique <email canonique> <email utilisé dans le commit>
+Lucas Charpentier <lucas.charpentier8@etu.univ-lorraine.fr> <lucas.charpentier8@etu.univ-lorraine.fr>
+Lucas Charpentier <lucas.charpentier8@etu.univ-lorraine.fr> <lucascharpentier55@gmail.com>
+Ahmed Errebache <ahmed.errebache1@gmail.com> <115078452+ahmed-errebache@users.noreply.github.com>
